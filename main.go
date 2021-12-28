@@ -35,7 +35,13 @@ func main() {
 		fmt.Println("Enter number for tickets:")
 		fmt.Scan(&userTickets)
 
-		if userTickets <= remainingTickets {
+		isValidName := len(firstName) >= 2 && len(lastName) >= 2
+		isValidEmail := strings.Contains(email, "@")
+		isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+		// isValidCity := city == "Singapore" || city == "London"
+		// isInvalidCity := city != "Singapore" || city != "London"
+
+		if isValidName && isValidEmail && isValidTicketNumber {
 			remainingTickets = remainingTickets - userTickets
 			bookings = append(bookings, firstName+" "+lastName)
 
@@ -58,9 +64,34 @@ func main() {
 			}
 
 		} else {
-			fmt.Printf("we only have a total of %v tickets. You can't book %v tickets.\n", remainingTickets, userTickets)
+			// fmt.Printf("we only have a total of %v tickets. You can't book %v tickets.\n", remainingTickets, userTickets)
+			// fmt.Println("Your input data is invalid, please try again.")
+			if !isValidName {
+				fmt.Println("first name or last name is too short.")
+			}
+			if !isValidEmail {
+				fmt.Println("@ sign in email is not present.")
+			}
+			if !isValidTicketNumber {
+				fmt.Printf("we only have a total of %v tickets. You can't book %v tickets.\n", remainingTickets, userTickets)
+			}
+
 		}
 
 	}
+
+	//city := "London"
+	//switch city {
+	//case "New York":
+	//	// execute code for booking NY conference tickets
+	//case "Singapore":
+	//	// execute SG code
+	//case "Hongkong":
+	//	// exectute HK code
+	//case "London", "Berlin":
+	//	// exectute code for the said cities
+	//default:
+	//	fmt.Println("No valid city selected.")
+	//}
 
 }
